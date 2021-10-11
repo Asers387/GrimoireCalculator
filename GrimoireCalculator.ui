@@ -6,91 +6,46 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>286</width>
-    <height>419</height>
+    <width>292</width>
+    <height>420</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>286</width>
-    <height>419</height>
+    <width>292</width>
+    <height>420</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>286</width>
-    <height>419</height>
+    <width>292</width>
+    <height>420</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>GrimoireCalculator</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>images/icon.ico</normaloff>images/icon.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="label_asers387">
-    <property name="geometry">
-     <rect>
-      <x>226</x>
-      <y>395</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/Asers387&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Asers387&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="openExternalLinks">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>266</width>
+      <x>11</x>
+      <y>11</y>
+      <width>272</width>
       <height>376</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3">
      <item row="0" column="0">
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_current">
-         <property name="text">
-          <string>Current Magic:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QSpinBox" name="spinBox_current">
-         <property name="minimumSize">
-          <size>
-           <width>45</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>45</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximum">
-          <number>999</number>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="2">
         <widget class="QLabel" name="label_time">
          <property name="text">
           <string>Time until replenished:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_maximum">
-         <property name="text">
-          <string>Maximum Magic:</string>
          </property>
         </widget>
        </item>
@@ -108,13 +63,62 @@
            <height>16777215</height>
           </size>
          </property>
+         <property name="accelerated">
+          <bool>true</bool>
+         </property>
          <property name="maximum">
           <number>999</number>
          </property>
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QLineEdit" name="lineEdit_time"/>
+        <widget class="QLineEdit" name="lineEdit_time">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QSpinBox" name="spinBox_current">
+         <property name="minimumSize">
+          <size>
+           <width>45</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>45</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="readOnly">
+          <bool>false</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::UpDownArrows</enum>
+         </property>
+         <property name="accelerated">
+          <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <number>999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_maximum">
+         <property name="text">
+          <string>Maximum Magic:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_current">
+         <property name="text">
+          <string>Current Magic:</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -155,18 +159,27 @@
         </widget>
        </item>
        <item row="0" column="3">
-        <widget class="QLineEdit" name="lineEdit_cost1">
+        <widget class="QSpinBox" name="spinBox_cost1">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>40</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string/>
-         </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="maximum">
+          <number>999</number>
          </property>
         </widget>
        </item>
@@ -205,18 +218,27 @@
         </widget>
        </item>
        <item row="1" column="3">
-        <widget class="QLineEdit" name="lineEdit_cost2">
+        <widget class="QSpinBox" name="spinBox_cost2">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>40</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string/>
-         </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="maximum">
+          <number>999</number>
          </property>
         </widget>
        </item>
@@ -255,18 +277,27 @@
         </widget>
        </item>
        <item row="2" column="3">
-        <widget class="QLineEdit" name="lineEdit_cost3">
+        <widget class="QSpinBox" name="spinBox_cost3">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>40</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string/>
-         </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="maximum">
+          <number>999</number>
          </property>
         </widget>
        </item>
@@ -305,18 +336,27 @@
         </widget>
        </item>
        <item row="3" column="3">
-        <widget class="QLineEdit" name="lineEdit_cost4">
+        <widget class="QSpinBox" name="spinBox_cost4">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>40</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string/>
-         </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="maximum">
+          <number>999</number>
          </property>
         </widget>
        </item>
@@ -355,18 +395,27 @@
         </widget>
        </item>
        <item row="4" column="3">
-        <widget class="QLineEdit" name="lineEdit_cost5">
+        <widget class="QSpinBox" name="spinBox_cost5">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>40</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string/>
-         </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="maximum">
+          <number>999</number>
          </property>
         </widget>
        </item>
@@ -405,18 +454,27 @@
         </widget>
        </item>
        <item row="5" column="3">
-        <widget class="QLineEdit" name="lineEdit_cost6">
+        <widget class="QSpinBox" name="spinBox_cost6">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>40</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string/>
-         </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="maximum">
+          <number>999</number>
          </property>
         </widget>
        </item>
@@ -455,18 +513,27 @@
         </widget>
        </item>
        <item row="6" column="3">
-        <widget class="QLineEdit" name="lineEdit_cost7">
+        <widget class="QSpinBox" name="spinBox_cost7">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>40</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string/>
-         </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="maximum">
+          <number>999</number>
          </property>
         </widget>
        </item>
@@ -505,18 +572,27 @@
         </widget>
        </item>
        <item row="7" column="3">
-        <widget class="QLineEdit" name="lineEdit_cost8">
+        <widget class="QSpinBox" name="spinBox_cost8">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>40</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string/>
-         </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="maximum">
+          <number>999</number>
          </property>
         </widget>
        </item>
@@ -555,18 +631,27 @@
         </widget>
        </item>
        <item row="8" column="3">
-        <widget class="QLineEdit" name="lineEdit_cost9">
+        <widget class="QSpinBox" name="spinBox_cost9">
+         <property name="minimumSize">
+          <size>
+           <width>40</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>40</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string/>
-         </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::NoButtons</enum>
+         </property>
+         <property name="maximum">
+          <number>999</number>
          </property>
         </widget>
        </item>
@@ -574,6 +659,160 @@
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="pushButton_cost1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>65</y>
+      <width>36</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_cost2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>99</y>
+      <width>36</width>
+      <height>37</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_cost3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>134</y>
+      <width>36</width>
+      <height>38</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_cost4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>170</y>
+      <width>36</width>
+      <height>39</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_cost5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>206</y>
+      <width>36</width>
+      <height>39</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_cost6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>242</y>
+      <width>36</width>
+      <height>39</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_cost7">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>278</y>
+      <width>36</width>
+      <height>39</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_cost8">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>314</y>
+      <width>36</width>
+      <height>39</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_cost9">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>350</y>
+      <width>36</width>
+      <height>38</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>292</width>
+     <height>21</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -582,40 +821,159 @@
  </resources>
  <connections>
   <connection>
-   <sender>spinBox_maximum</sender>
-   <signal>valueChanged(int)</signal>
+   <sender>pushButton_cost1</sender>
+   <signal>clicked()</signal>
    <receiver>GrimoireCalculatorClass</receiver>
-   <slot>maximumMagicModified()</slot>
+   <slot>spell1Pressed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>364</x>
-     <y>56</y>
+     <x>29</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
-     <x>200</x>
-     <y>342</y>
+     <x>145</x>
+     <y>221</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>spinBox_current</sender>
-   <signal>valueChanged(int)</signal>
+   <sender>pushButton_cost2</sender>
+   <signal>clicked()</signal>
    <receiver>GrimoireCalculatorClass</receiver>
-   <slot>currentMagicModified()</slot>
+   <slot>spell2Pressed()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>364</x>
-     <y>30</y>
+     <x>29</x>
+     <y>138</y>
     </hint>
     <hint type="destinationlabel">
-     <x>200</x>
-     <y>342</y>
+     <x>145</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_cost3</sender>
+   <signal>clicked()</signal>
+   <receiver>GrimoireCalculatorClass</receiver>
+   <slot>spell3Pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>29</x>
+     <y>174</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_cost4</sender>
+   <signal>clicked()</signal>
+   <receiver>GrimoireCalculatorClass</receiver>
+   <slot>spell4Pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>29</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_cost5</sender>
+   <signal>clicked()</signal>
+   <receiver>GrimoireCalculatorClass</receiver>
+   <slot>spell5Pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>29</x>
+     <y>245</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_cost6</sender>
+   <signal>clicked()</signal>
+   <receiver>GrimoireCalculatorClass</receiver>
+   <slot>spell6Pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>29</x>
+     <y>281</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_cost7</sender>
+   <signal>clicked()</signal>
+   <receiver>GrimoireCalculatorClass</receiver>
+   <slot>spell7Pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>29</x>
+     <y>318</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_cost8</sender>
+   <signal>clicked()</signal>
+   <receiver>GrimoireCalculatorClass</receiver>
+   <slot>spell8Pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>29</x>
+     <y>354</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_cost9</sender>
+   <signal>clicked()</signal>
+   <receiver>GrimoireCalculatorClass</receiver>
+   <slot>spell9Pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>29</x>
+     <y>390</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>145</x>
+     <y>221</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
-  <slot>currentMagicModified()</slot>
-  <slot>maximumMagicModified()</slot>
+  <slot>spell1Pressed()</slot>
+  <slot>spell2Pressed()</slot>
+  <slot>spell3Pressed()</slot>
+  <slot>spell4Pressed()</slot>
+  <slot>spell5Pressed()</slot>
+  <slot>spell6Pressed()</slot>
+  <slot>spell7Pressed()</slot>
+  <slot>spell8Pressed()</slot>
+  <slot>spell9Pressed()</slot>
  </slots>
 </ui>

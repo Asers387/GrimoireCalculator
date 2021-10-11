@@ -12,10 +12,24 @@ public:
 
 private:
     Ui::GrimoireCalculatorClass ui;
+    bool _calculate();
     void _updateCost();
     void _updateTime();
+    void _activateSpell(int spellCost);
+    void _errorDisplay(QString &errorMessage);
 
 private slots:
-    void currentMagicModified();
-    void maximumMagicModified();
+    void calculatePressed();
+    void maxCurrentMagicPressed();
+    void helpPressed();
+    void aboutPressed();
+    void spell1Pressed();
+    void spell2Pressed();
+    void spell3Pressed();
+    void spell4Pressed();
+    void spell5Pressed();
+    void spell6Pressed();
+    void spell7Pressed();
+    void spell8Pressed();
+    void spell9Pressed();
 };
