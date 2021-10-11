@@ -108,7 +108,7 @@ void GrimoireCalculator::helpPressed()
 {
     std::string helpMessage = "<b><u>Calculate:</u></b> Calculates time needed to replenish magic and costs for spells.<br>"
         "<b><u>Max Current Magic:</u></b> Sets current magic equal to maximum magic.<br><br>"
-        "You can click the spells to apply their cost to your current magic.<br><i>(Calculate will be applied first.)</i>";
+        "You can click on the spells to apply their cost to your current magic.<br><i>(Calculate will be applied first.)</i>";
     QMessageBox::about(this, "Help", QString::fromStdString(helpMessage));
 }
 
