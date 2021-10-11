@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="GrimoireCalculator">
+    <file>images/Grimoireicons_01.png</file>
+    <file>images/Grimoireicons_02.png</file>
+    <file>images/Grimoireicons_03.png</file>
+    <file>images/Grimoireicons_04.png</file>
+    <file>images/Grimoireicons_05.png</file>
+    <file>images/Grimoireicons_06.png</file>
+    <file>images/Grimoireicons_07.png</file>
+    <file>images/Grimoireicons_08.png</file>
+    <file>images/Grimoireicons_09.png</file>
+  </qresource>
+</RCC>
