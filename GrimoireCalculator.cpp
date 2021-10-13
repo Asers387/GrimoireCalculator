@@ -1,7 +1,4 @@
 #include "GrimoireCalculator.h"
-#include <cmath>
-#include <qmessagebox.h>
-#include <string>
 
 GrimoireCalculator::GrimoireCalculator(QWidget *parent)
     : QMainWindow(parent)
@@ -17,12 +14,12 @@ GrimoireCalculator::GrimoireCalculator(QWidget *parent)
     QAction* aboutAction = ui.menuBar->addAction("About");
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutPressed()));
 
-    _calculate();
+    _readState();
 }
 
 /*
  * Validates current magic and calculates time and costs
- * If invalid, displays error message and returns false ; else returns true.
+ * If invalid, displays error message and returns false ; else returns true
  */
 bool GrimoireCalculator::_calculate()
 {
@@ -88,6 +85,60 @@ void GrimoireCalculator::_activateSpell(int spellCost)
 void GrimoireCalculator::_errorDisplay(QString& errorMessage)
 {
     QMessageBox::warning(this, "Error!", errorMessage);
+}
+
+/*
+ * Reads state of app from the state.txt file
+ * Sets values into app
+ */
+void GrimoireCalculator::_readState()
+{
+    struct stat buf;
+    if (stat("state.txt", &buf) == 0) // Checks if file exists
+    {
+        std::ifstream stateFile("state.txt");
+        try
+        {
+            std::string line;
+            getline(stateFile, line);
+            int currentMagic = std::stoi(line);
+            getline(stateFile, line);
+            int maximumMagic = std::stoi(line);
+            if (currentMagic < 0 || currentMagic > 999 || maximumMagic < 0 || maximumMagic > 999 || currentMagic > maximumMagic)
+                throw std::logic_error("");
+            ui.spinBox_current->setValue(currentMagic);
+            ui.spinBox_maximum->setValue(maximumMagic);
+        }
+        catch (std::logic_error&)
+        {
+            _errorDisplay(QString::fromStdString("State file is invalid, resetting values..."));
+        }
+        stateFile.close();
+    }
+    else
+    {
+        std::ofstream stateFile("state.txt");
+        stateFile.close();
+    }
+    _calculate();
+}
+
+// Saves state of app to the state.txt file
+void GrimoireCalculator::_saveState()
+{
+    std::ofstream stateFile("state.txt");
+    stateFile << std::to_string(ui.spinBox_current->value()) << "\n"
+        << std::to_string(ui.spinBox_maximum->value());
+}
+
+/*
+ * Override of closeEvent function
+ * Used to save state of app when closed
+ */
+void GrimoireCalculator::closeEvent(QCloseEvent* event)
+{
+    _saveState();
+    event->accept();
 }
 
 // Slot: Calculate menu button pressed

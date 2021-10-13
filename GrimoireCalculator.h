@@ -1,6 +1,13 @@
-#pragma once
+#ifndef GRIMOIRECALCULATOR_H
+#define GRIMOIRECALCULATOR_H
 
 #include <QtWidgets/QMainWindow>
+#include <cmath>
+#include <qmessagebox.h>
+#include <string>
+#include <sys/stat.h>
+#include <fstream>
+#include <QCloseEvent>
 #include "ui_GrimoireCalculator.h"
 
 class GrimoireCalculator : public QMainWindow
@@ -12,11 +19,16 @@ public:
 
 private:
     Ui::GrimoireCalculatorClass ui;
+
     bool _calculate();
     void _updateCost();
     void _updateTime();
     void _activateSpell(int spellCost);
     void _errorDisplay(QString &errorMessage);
+    void _readState();
+    void _saveState();
+
+    void closeEvent(QCloseEvent *event);
 
 private slots:
     void calculatePressed();
@@ -33,3 +45,5 @@ private slots:
     void spell8Pressed();
     void spell9Pressed();
 };
+
+#endif // GRIMOIRECALCULATOR_H
