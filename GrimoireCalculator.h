@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <fstream>
 #include <QCloseEvent>
+//#include <thread>
 #include "ui_GrimoireCalculator.h"
 
 class GrimoireCalculator : public QMainWindow
@@ -27,12 +28,14 @@ private:
     void _errorDisplay(QString &errorMessage);
     void _readState();
     void _saveState();
+    //void _realTime();
 
     void closeEvent(QCloseEvent *event);
 
 private slots:
     void calculatePressed();
     void maxCurrentMagicPressed();
+    //void realTimePressed();
     void helpPressed();
     void aboutPressed();
     void spell1Pressed();

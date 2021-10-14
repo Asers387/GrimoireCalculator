@@ -5,13 +5,17 @@ GrimoireCalculator::GrimoireCalculator(QWidget *parent)
 {
     ui.setupUi(this);
 
-    QAction *calculateAction = ui.menuBar->addAction("Calculate");
+    QAction* calculateAction = ui.menuBar->addAction("Calculate");
     connect(calculateAction, SIGNAL(triggered()), this, SLOT(calculatePressed()));
     QAction* maxCurrentMagicAction = ui.menuBar->addAction("Max Current Magic");
     connect(maxCurrentMagicAction, SIGNAL(triggered()), this, SLOT(maxCurrentMagicPressed()));
-    QAction* helpAction = ui.menuBar->addAction("Help");
+    QMenu* miscMenu = ui.menuBar->addMenu("Misc");
+    //QAction* realTimeAction = miscMenu->addAction("Real-Time");
+    //realTimeAction->setCheckable(true);
+    //connect(realTimeAction, SIGNAL(triggered()), this, SLOT(realTimePressed()));
+    QAction* helpAction = miscMenu->addAction("Help");
     connect(helpAction, SIGNAL(triggered()), this, SLOT(helpPressed()));
-    QAction* aboutAction = ui.menuBar->addAction("About");
+    QAction* aboutAction = miscMenu->addAction("About");
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutPressed()));
 
     _readState();
@@ -84,7 +88,8 @@ void GrimoireCalculator::_activateSpell(int spellCost)
 // Error Dialog display
 void GrimoireCalculator::_errorDisplay(QString& errorMessage)
 {
-    QMessageBox::warning(this, "Error!", errorMessage);
+    QMessageBox messageBox(QMessageBox::Warning, "Error!", errorMessage, QMessageBox::Ok, this);
+    messageBox.exec();
 }
 
 /*
@@ -131,6 +136,12 @@ void GrimoireCalculator::_saveState()
         << std::to_string(ui.spinBox_maximum->value());
 }
 
+// Real-Time calculation of current magic and time until replenished
+//void GrimoireCalculator::_realTime()
+//{
+//    ;
+//}
+
 /*
  * Override of closeEvent function
  * Used to save state of app when closed
@@ -154,19 +165,28 @@ void GrimoireCalculator::maxCurrentMagicPressed()
     _updateTime();
 }
 
+// Slot: Real-Time menu button pressed
+//void GrimoireCalculator::realTimePressed()
+//{
+//    ;
+//}
+
 // Slot: Help menu button pressed
 void GrimoireCalculator::helpPressed()
 {
-    std::string helpMessage = "<b><u>Calculate:</u></b> Calculates time needed to replenish magic and costs for spells.<br>"
-        "<b><u>Max Current Magic:</u></b> Sets current magic equal to maximum magic.<br><br>"
+    QString helpMessage = "Costs are indicated to the right of each spell.<br><br>"
+        "<b><u>Calculate:</u></b> Calculates time needed to replenish magic and costs for spells.<br>"
+        "<b><u>Max Current Magic:</u></b> Sets current magic equal to maximum magic.</b><br><br>"
         "You can click on the spells to apply their cost to your current magic.<br><i>(Calculate will be applied first.)</i>";
-    QMessageBox::about(this, "Help", QString::fromStdString(helpMessage));
+    QMessageBox messageBox(QMessageBox::NoIcon, "Help", helpMessage, QMessageBox::Ok, this);
+    messageBox.exec();
 }
 
 // Slot: About menu button pressed
 void GrimoireCalculator::aboutPressed()
 {
-    QMessageBox::about(this, "About", "Developped by <a href='https://github.com/Asers387'>Asers387</a>");
+    QMessageBox messageBox(QMessageBox::NoIcon, "About", "Developped by <a href='https://github.com/Asers387'>Asers387</a>", QMessageBox::Ok, this);
+    messageBox.exec();
 }
 
 // Slot: Spell 1 button pressed
