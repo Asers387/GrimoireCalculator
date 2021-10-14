@@ -185,7 +185,9 @@ void GrimoireCalculator::helpPressed()
 // Slot: About menu button pressed
 void GrimoireCalculator::aboutPressed()
 {
-    QMessageBox messageBox(QMessageBox::NoIcon, "About", "Developped by <a href='https://github.com/Asers387'>Asers387</a>", QMessageBox::Ok, this);
+    QString aboutMessage = "Version 1.1.2<br>"
+        "Developped by <a href='https://github.com/Asers387'>Asers387</a>";
+    QMessageBox messageBox(QMessageBox::NoIcon, "About", aboutMessage, QMessageBox::Ok, this);
     messageBox.exec();
 }
 

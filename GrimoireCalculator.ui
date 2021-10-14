@@ -743,7 +743,6 @@
      </item>
     </layout>
    </widget>
-   <zorder>layoutWidget</zorder>
    <zorder>pushButton_cost1</zorder>
    <zorder>pushButton_cost8</zorder>
    <zorder>pushButton_cost9</zorder>
