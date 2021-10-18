@@ -8,7 +8,7 @@
 #include <sys/stat.h>
 #include <fstream>
 #include <QCloseEvent>
-//#include <thread>
+#include <thread>
 #include "ui_GrimoireCalculator.h"
 
 class GrimoireCalculator : public QMainWindow
@@ -21,21 +21,28 @@ public:
 private:
     Ui::GrimoireCalculatorClass ui;
 
+    int timeHour;
+    int timeMin;
+    int timeSec;
+    bool realTimeActivated = false;
+    std::thread realTimeThread;
+
     bool _calculate();
     void _updateCost();
     void _updateTime();
+    void _updateTimeFormat();
     void _activateSpell(int spellCost);
     void _errorDisplay(QString &errorMessage);
     void _readState();
     void _saveState();
-    //void _realTime();
+    void _realTime();
 
     void closeEvent(QCloseEvent *event);
 
 private slots:
     void calculatePressed();
     void maxCurrentMagicPressed();
-    //void realTimePressed();
+    void realTimePressed();
     void helpPressed();
     void aboutPressed();
     void spell1Pressed();

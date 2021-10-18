@@ -5,19 +5,6 @@ GrimoireCalculator::GrimoireCalculator(QWidget *parent)
 {
     ui.setupUi(this);
 
-    QAction* calculateAction = ui.menuBar->addAction("Calculate");
-    connect(calculateAction, SIGNAL(triggered()), this, SLOT(calculatePressed()));
-    QAction* maxCurrentMagicAction = ui.menuBar->addAction("Max Current Magic");
-    connect(maxCurrentMagicAction, SIGNAL(triggered()), this, SLOT(maxCurrentMagicPressed()));
-    QMenu* miscMenu = ui.menuBar->addMenu("Misc");
-    //QAction* realTimeAction = miscMenu->addAction("Real-Time");
-    //realTimeAction->setCheckable(true);
-    //connect(realTimeAction, SIGNAL(triggered()), this, SLOT(realTimePressed()));
-    QAction* helpAction = miscMenu->addAction("Help");
-    connect(helpAction, SIGNAL(triggered()), this, SLOT(helpPressed()));
-    QAction* aboutAction = miscMenu->addAction("About");
-    connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutPressed()));
-
     _readState();
 }
 
@@ -62,16 +49,23 @@ void GrimoireCalculator::_updateTime()
     if (ui.spinBox_maximum->value() > maxMagic)
         maxMagic = ui.spinBox_maximum->value();
     double time = 5 * std::sqrt(maxMagic) / 9 * (std::sqrt(ui.spinBox_maximum->value()) - std::sqrt(ui.spinBox_current->value()));
-    double timeHour = std::floor(time / 60);
-    double timeSec = std::fmod(time, 1);
+    timeHour = std::floor(time / 60);
+    timeSec = std::floor(60 * std::fmod(time, 1));
+    timeMin = time - 60 * std::floor(time / 60) - std::fmod(time, 1);
+    _updateTimeFormat();
+}
+
+// Format updated time until replenished
+void GrimoireCalculator::_updateTimeFormat()
+{
     if (timeHour >= 1)
         ui.lineEdit_time->setText(QString::number(timeHour) + " h "
-            + QString::number(time - 60 * timeHour - timeSec) + " m "
-            + QString::number(std::floor(60 * timeSec)) + " s");
-    else if (time >= 1)
-        ui.lineEdit_time->setText(QString::number(time - timeSec) + " m "
-            + QString::number(std::floor(60 * timeSec)) + " s");
-    else ui.lineEdit_time->setText(QString::number(std::floor(60 * timeSec)) + " s");
+            + QString::number(timeMin) + " m "
+            + QString::number(timeSec) + " s");
+    else if (timeMin >= 1)
+        ui.lineEdit_time->setText(QString::number(timeMin) + " m "
+            + QString::number(timeSec) + " s");
+    else ui.lineEdit_time->setText(QString::number(timeSec) + " s");
 }
 
 // Activate spell when button pressed
@@ -93,15 +87,15 @@ void GrimoireCalculator::_errorDisplay(QString& errorMessage)
 }
 
 /*
- * Reads state of app from the state.txt file
+ * Reads state of app from the state file
  * Sets values into app
  */
 void GrimoireCalculator::_readState()
 {
     struct stat buf;
-    if (stat("state.txt", &buf) == 0) // Checks if file exists
+    if (stat("state", &buf) == 0) // Checks if file exists
     {
-        std::ifstream stateFile("state.txt");
+        std::ifstream stateFile("state");
         try
         {
             std::string line;
@@ -122,25 +116,48 @@ void GrimoireCalculator::_readState()
     }
     else
     {
-        std::ofstream stateFile("state.txt");
+        std::ofstream stateFile("state");
         stateFile.close();
     }
     _calculate();
 }
 
-// Saves state of app to the state.txt file
+// Saves state of app to the state file
 void GrimoireCalculator::_saveState()
 {
-    std::ofstream stateFile("state.txt");
+    std::ofstream stateFile("state");
     stateFile << std::to_string(ui.spinBox_current->value()) << "\n"
         << std::to_string(ui.spinBox_maximum->value());
 }
 
 // Real-Time calculation of current magic and time until replenished
-//void GrimoireCalculator::_realTime()
-//{
-//    ;
-//}
+void GrimoireCalculator::_realTime()
+{
+    auto preciseTime = std::chrono::high_resolution_clock::now();
+    while (true)
+    {
+        preciseTime += (std::chrono::seconds)1;
+        std::this_thread::sleep_until(preciseTime);
+        if (!realTimeActivated) break;
+
+        if (!(timeHour == 0 && timeMin == 0 && timeSec == 0))
+        {
+            timeSec -= 1;
+            if (timeSec == -1)
+            {
+                timeSec = 59;
+                timeMin -= 1;
+                if (timeMin == -1)
+                {
+                    timeMin = 59;
+                    timeHour -= 1;
+                }
+            }
+            _updateTimeFormat();
+        }
+    }
+    realTimeThread.detach();
+}
 
 /*
  * Override of closeEvent function
@@ -148,6 +165,7 @@ void GrimoireCalculator::_saveState()
  */
 void GrimoireCalculator::closeEvent(QCloseEvent* event)
 {
+    if (realTimeActivated) realTimeThread.detach();
     _saveState();
     event->accept();
 }
@@ -166,10 +184,18 @@ void GrimoireCalculator::maxCurrentMagicPressed()
 }
 
 // Slot: Real-Time menu button pressed
-//void GrimoireCalculator::realTimePressed()
-//{
-//    ;
-//}
+void GrimoireCalculator::realTimePressed()
+{
+    if (ui.realTimeAction->isChecked())
+    {
+        realTimeActivated = true;
+        realTimeThread = std::thread(&GrimoireCalculator::_realTime, this);
+    }
+    else
+    {
+        realTimeActivated = false;
+    }
+}
 
 // Slot: Help menu button pressed
 void GrimoireCalculator::helpPressed()
@@ -185,7 +211,7 @@ void GrimoireCalculator::helpPressed()
 // Slot: About menu button pressed
 void GrimoireCalculator::aboutPressed()
 {
-    QString aboutMessage = "Version 1.1.2<br>"
+    QString aboutMessage = "Version 2.0<br>"
         "Developped by <a href='https://github.com/Asers387'>Asers387</a>";
     QMessageBox messageBox(QMessageBox::NoIcon, "About", aboutMessage, QMessageBox::Ok, this);
     messageBox.exec();
